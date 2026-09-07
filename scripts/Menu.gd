@@ -234,7 +234,7 @@ func _on_search_completed(items: Array, has_more: bool = false, next_page: int =
 	if has_more_pages and next_page_to_load > 0:
 		btn_load_more.visible = true
 		btn_load_more.disabled = false
-		btn_load_more.text = "🔄 Carregar Mais Preços da SEFAZ (Página %d+)" % next_page_to_load
+		btn_load_more.text = "Carregar Mais Preços da SEFAZ (Página %d+)" % next_page_to_load
 	else:
 		btn_load_more.visible = false
 	
@@ -253,7 +253,7 @@ func _on_search_error(msg: String) -> void:
 	btn_search.disabled = false
 	btn_load_more.disabled = false
 	if is_loading_more:
-		btn_load_more.text = "🔄 Tentar Carregar Novamente"
+		btn_load_more.text = "Tentar Carregar Novamente"
 		is_loading_more = false
 	lbl_status.text = "Aviso: " + msg
 
@@ -297,7 +297,7 @@ func _update_cart_ui() -> void:
 		total_items += int(it.get("quantidade", 1))
 	
 	var cart_total = Global.get_cart_total()
-	cart_badge_btn.text = "🛒 Carrinho (%d itens • %s)" % [total_items, Global.format_currency(cart_total)]
+	cart_badge_btn.text = "Carrinho (%d itens • %s)" % [total_items, Global.format_currency(cart_total)]
 	
 	for child in cart_items_container.get_children():
 		child.queue_free()
@@ -353,7 +353,7 @@ func _calculate_store_comparisons() -> void:
 	stores_arr.sort_custom(func(a, b): return a["total"] < b["total"])
 	
 	var winner = stores_arr[0]
-	lbl_winner_store.text = "🏆 " + winner["nome"]
+	lbl_winner_store.text = "★ " + winner["nome"]
 	lbl_winner_val.text = Global.format_currency(winner["total"])
 	
 	if stores_arr.size() > 1:
@@ -461,7 +461,7 @@ func _render_markets_tab() -> void:
 		vbox.add_theme_constant_override("separation", 3)
 		
 		var store_lbl = Label.new()
-		store_lbl.text = "🏪 " + s_name
+		store_lbl.text = s_name
 		store_lbl.add_theme_font_size_override("font_size", 16)
 		store_lbl.add_theme_color_override("font_color", Color(0.09, 0.14, 0.22, 1))
 		
@@ -516,7 +516,7 @@ func _on_copy_whatsapp_pressed() -> void:
 	if Global.cart_items.is_empty():
 		return
 	
-	var text = "*🛒 LISTA DE COMPRAS - BUSCA PREÇO PARINTINS*\n\n"
+	var text = "*LISTA DE COMPRAS - BUSCA PREÇO PARINTINS*\n\n"
 	for item in Global.cart_items:
 		var name = item.get("nome", "")
 		var qty = item.get("quantidade", 1)
@@ -531,4 +531,4 @@ func _on_copy_whatsapp_pressed() -> void:
 	btn_copy_whatsapp.text = "✓ Lista Copiada!"
 	await get_tree().create_timer(2.0).timeout
 	if is_instance_valid(btn_copy_whatsapp):
-		btn_copy_whatsapp.text = "📲 Copiar Lista Formatada para WhatsApp"
+		btn_copy_whatsapp.text = "Copiar Lista Formatada para WhatsApp"

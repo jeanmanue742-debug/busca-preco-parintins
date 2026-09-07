@@ -249,13 +249,13 @@ theme_override_constants/separation = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.08, 0.15, 0.3, 1)
 theme_override_font_sizes/font_size = 22
-text = "Busca PreÃ§o Parintins"
+text = "Busca Preço Parintins"
 
 [node name="Subtitle" type="Label" parent="Margin/MainVBox/Header/HBox/TitleBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.45, 0.52, 0.62, 1)
 theme_override_font_sizes/font_size = 12
-text = "PreÃ§os e Notas Fiscais da SEFAZ-AM atualizados em tempo real"
+text = "Preços e Notas Fiscais da SEFAZ-AM atualizados em tempo real"
 
 [node name="CityBadge" type="PanelContainer" parent="Margin/MainVBox/Header/HBox"]
 layout_mode = 2
@@ -265,7 +265,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_badge_city")
 layout_mode = 2
 theme_override_colors/font_color = Color(0.08, 0.35, 0.85, 1)
 theme_override_font_sizes/font_size = 13
-text = "ðŸ“ Parintins - AM"
+text = "Parintins - AM"
 
 [node name="BtnCartBadge" type="Button" parent="Margin/MainVBox/Header/HBox"]
 unique_name_in_owner = true
@@ -274,7 +274,7 @@ mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_cart_badge")
-text = "ðŸ›’ Carrinho (0 itens â€¢ R$ 0,00)"
+text = "Carrinho (0 itens • R$ 0,00)"
 
 [node name="NavBar" type="HBoxContainer" parent="Margin/MainVBox"]
 layout_mode = 2
@@ -288,7 +288,7 @@ mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_tab_active")
-text = "ðŸ” Pesquisar Produtos"
+text = "Pesquisar Produtos"
 
 [node name="NavBtnCart" type="Button" parent="Margin/MainVBox/NavBar"]
 unique_name_in_owner = true
@@ -298,7 +298,7 @@ mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0.25, 0.32, 0.42, 1)
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_tab_inactive")
-text = "ðŸ›’ Carrinho & Comparador"
+text = "Carrinho & Comparador"
 
 [node name="NavBtnMarkets" type="Button" parent="Margin/MainVBox/NavBar"]
 unique_name_in_owner = true
@@ -308,7 +308,7 @@ mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0.25, 0.32, 0.42, 1)
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_tab_inactive")
-text = "ðŸª Supermercados de Parintins"
+text = "Supermercados de Parintins"
 
 [node name="TabContainer" type="TabContainer" parent="Margin/MainVBox"]
 unique_name_in_owner = true
@@ -340,7 +340,7 @@ theme_override_colors/font_color = Color(0.09, 0.14, 0.22, 1)
 theme_override_colors/font_placeholder_color = Color(0.55, 0.62, 0.72, 1)
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_input")
-placeholder_text = "Digite o nome do produto (ex: arroz, leite, cafÃ©, feijÃ£o, frango...)"
+placeholder_text = "Digite o nome do produto (ex: arroz, leite, café, feijão, frango...)"
 
 [node name="OptDias" type="OptionButton" parent="Margin/MainVBox/TabContainer/TabSearch/SearchCard/VBox/ControlsHBox"]
 unique_name_in_owner = true
@@ -368,7 +368,7 @@ mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_search")
-text = "Buscar PreÃ§os"
+text = "Buscar Preços"
 
 [node name="ChipsContainer" type="HBoxContainer" parent="Margin/MainVBox/TabContainer/TabSearch/SearchCard/VBox"]
 unique_name_in_owner = true
@@ -379,7 +379,7 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme_override_colors/font_color = Color(0.45, 0.52, 0.62, 1)
 theme_override_font_sizes/font_size = 12
-text = "SugestÃµes rÃ¡pidas:"
+text = "Sugestões rápidas:"
 
 [node name="StatusHBox" type="HBoxContainer" parent="Margin/MainVBox/TabContainer/TabSearch"]
 layout_mode = 2
@@ -390,7 +390,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.15, 0.35, 0.7, 1)
 theme_override_font_sizes/font_size = 13
-text = "Buscando preÃ§os de 'arroz' na SEFAZ (Parintins - AM)..."
+text = "Buscando preços de 'arroz' na SEFAZ (Parintins - AM)..."
 
 [node name="ScrollResults" type="ScrollContainer" parent="Margin/MainVBox/TabContainer/TabSearch"]
 layout_mode = 2
@@ -418,7 +418,7 @@ mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0.12, 0.38, 0.85, 1)
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_card")
-text = "ðŸ”„ Carregar Mais PreÃ§os da SEFAZ"
+text = "Carregar Mais Preços da SEFAZ"
 
 [node name="EmptySearch" type="PanelContainer" parent="Margin/MainVBox/TabContainer/TabSearch"]
 unique_name_in_owner = true
@@ -437,7 +437,7 @@ theme_override_constants/separation = 8
 [node name="Icon" type="Label" parent="Margin/MainVBox/TabContainer/TabSearch/EmptySearch/Center/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
-text = "ðŸ”"
+text = ""
 horizontal_alignment = 1
 
 [node name="Msg" type="Label" parent="Margin/MainVBox/TabContainer/TabSearch/EmptySearch/Center/VBox"]
@@ -451,7 +451,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5, 0.58, 0.68, 1)
 theme_override_font_sizes/font_size = 13
-text = "Tente buscar termos mais genÃ©ricos como 'feijÃ£o', 'cafÃ©' ou selecione 'Todos os Bairros'."
+text = "Tente buscar termos mais genéricos como 'feijão', 'café' ou selecione 'Todos os Bairros'."
 horizontal_alignment = 1
 
 [node name="TabCart" type="HBoxContainer" parent="Margin/MainVBox/TabContainer"]
@@ -476,7 +476,7 @@ theme_override_constants/separation = 6
 layout_mode = 2
 theme_override_colors/font_color = Color(0.99, 0.95, 0.75, 1)
 theme_override_font_sizes/font_size = 13
-text = "ðŸ† SUPERMERCADO MAIS BARATO DE PARINTINS"
+text = "SUPERMERCADO MAIS BARATO DE PARINTINS"
 
 [node name="LblWinnerName" type="Label" parent="Margin/MainVBox/TabContainer/TabCart/LeftColumn/WinnerCard/VBox"]
 unique_name_in_owner = true
@@ -513,7 +513,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_colors/font_color = Color(0.09, 0.14, 0.22, 1)
 theme_override_font_sizes/font_size = 15
-text = "ðŸ“Š Comparativo por Estabelecimento"
+text = "Comparativo por Estabelecimento"
 
 [node name="ScrollStores" type="ScrollContainer" parent="Margin/MainVBox/TabContainer/TabCart/LeftColumn/StoreComparisonCard/VBox"]
 layout_mode = 2
@@ -548,7 +548,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.09, 0.14, 0.22, 1)
 theme_override_font_sizes/font_size = 16
-text = "ðŸ›’ Produtos Adicionados Ã  Lista"
+text = "Produtos Adicionados à Lista"
 
 [node name="LblTotalVal" type="Label" parent="Margin/MainVBox/TabContainer/TabCart/RightColumn/CartItemsCard/VBox/CartHeader"]
 unique_name_in_owner = true
@@ -573,7 +573,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5, 0.58, 0.68, 1)
 theme_override_font_sizes/font_size = 14
-text = "Sua lista estÃ¡ vazia. Volte na aba 'Pesquisar Produtos' e clique em '+ Adicionar Ã  Lista'."
+text = "Sua lista está vazia. Volte na aba 'Pesquisar Produtos' e clique em '+ Adicionar à Lista'."
 horizontal_alignment = 1
 
 [node name="ActionsCard" type="PanelContainer" parent="Margin/MainVBox/TabContainer/TabCart/RightColumn"]
@@ -592,7 +592,7 @@ mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0.85, 0.25, 0.25, 1)
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_clear_btn")
-text = "ðŸ—‘ Limpar Lista"
+text = "Limpar Lista"
 
 [node name="BtnCopyWhatsApp" type="Button" parent="Margin/MainVBox/TabContainer/TabCart/RightColumn/ActionsCard/HBox"]
 unique_name_in_owner = true
@@ -602,7 +602,7 @@ mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_whatsapp_btn")
-text = "ðŸ“² Copiar Lista Formatada para WhatsApp"
+text = "Copiar Lista Formatada para WhatsApp"
 
 [node name="TabMarkets" type="VBoxContainer" parent="Margin/MainVBox/TabContainer"]
 layout_mode = 2
@@ -621,7 +621,7 @@ theme_override_constants/separation = 12
 layout_mode = 2
 theme_override_colors/font_color = Color(0.09, 0.14, 0.22, 1)
 theme_override_font_sizes/font_size = 16
-text = "ðŸª Supermercados e Mercados Detectados em Parintins - AM"
+text = "Supermercados e Mercados Detectados em Parintins - AM"
 
 [node name="ScrollMarkets" type="ScrollContainer" parent="Margin/MainVBox/TabContainer/TabMarkets/MarketsCard/VBox"]
 layout_mode = 2
