@@ -53,7 +53,7 @@ func _on_request_completed(result: int, response_code: int, _headers: PackedStri
 	if data is Dictionary and data.has("items"):
 		var items = data["items"]
 		var has_more = bool(data.get("hasMore", false))
-		var next_page = int(data.get("nextPage", 0))
+		var next_page = int(data.get("nextPage")) if data.get("nextPage") != null else 0
 		Global.search_completed.emit(items, has_more, next_page)
 	else:
 		Global.search_completed.emit([], false, 0)
