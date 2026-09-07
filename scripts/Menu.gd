@@ -6,12 +6,17 @@ var api_client: Node
 
 # Referências da Interface
 @onready var tab_container: TabContainer = %TabContainer
+@onready var nav_btn_search: Button = %NavBtnSearch
+@onready var nav_btn_cart: Button = %NavBtnCart
+@onready var nav_btn_markets: Button = %NavBtnMarkets
+
 @onready var input_search: LineEdit = %InputSearch
 @onready var opt_dias: OptionButton = %OptDias
 @onready var opt_bairros: OptionButton = %OptBairros
 @onready var btn_search: Button = %BtnSearch
 @onready var lbl_status: Label = %LblStatus
 @onready var cart_badge_btn: Button = %BtnCartBadge
+@onready var chips_container: HBoxContainer = %ChipsContainer
 
 # Aba 1 - Pesquisa
 @onready var results_container: GridContainer = %GridResults
@@ -35,6 +40,10 @@ var api_client: Node
 var product_card_scene = preload("res://scenes/ProductCard.tscn")
 var cart_item_scene = preload("res://scenes/CartItem.tscn")
 
+# Estilos de Navegação
+var style_tab_active: StyleBoxFlat
+var style_tab_inactive: StyleBoxFlat
+
 # Dados em cache
 var all_current_results: Array = []
 var known_stores: Dictionary = {}
@@ -43,16 +52,60 @@ func _ready() -> void:
 	api_client = ApiClientClass.new()
 	add_child(api_client)
 	
+	_create_tab_styles()
+	
 	Global.search_completed.connect(_on_search_completed)
 	Global.search_error.connect(_on_search_error)
 	Global.cart_updated.connect(_on_cart_updated)
 	
 	_setup_filters()
+	_setup_chips()
 	_setup_events()
 	_update_cart_ui()
+	_switch_tab(0)
 	
 	# Realiza uma busca inicial automática por arroz para já carregar itens de Parintins
 	_do_search("arroz")
+
+func _create_tab_styles() -> void:
+	style_tab_active = StyleBoxFlat.new()
+	style_tab_active.bg_color = Color(0.15, 0.42, 0.92, 1)
+	style_tab_active.border_width_bottom = 3
+	style_tab_active.border_color = Color(0.08, 0.28, 0.72, 1)
+	style_tab_active.set_corner_radius_all(14)
+	style_tab_active.content_margin_left = 20
+	style_tab_active.content_margin_top = 12
+	style_tab_active.content_margin_right = 20
+	style_tab_active.content_margin_bottom = 12
+	style_tab_active.shadow_color = Color(0.15, 0.42, 0.92, 0.3)
+	style_tab_active.shadow_size = 8
+	style_tab_active.shadow_offset = Vector2(0, 3)
+	
+	style_tab_inactive = StyleBoxFlat.new()
+	style_tab_inactive.bg_color = Color(1, 1, 1, 1)
+	style_tab_inactive.border_width_left = 1
+	style_tab_inactive.border_width_top = 1
+	style_tab_inactive.border_width_right = 1
+	style_tab_inactive.border_width_bottom = 2
+	style_tab_inactive.border_color = Color(0.86, 0.9, 0.95, 1)
+	style_tab_inactive.set_corner_radius_all(14)
+	style_tab_inactive.content_margin_left = 20
+	style_tab_inactive.content_margin_top = 12
+	style_tab_inactive.content_margin_right = 20
+	style_tab_inactive.content_margin_bottom = 12
+
+func _switch_tab(idx: int) -> void:
+	tab_container.current_tab = idx
+	
+	var btns = [nav_btn_search, nav_btn_cart, nav_btn_markets]
+	for i in range(btns.size()):
+		var b = btns[i]
+		if i == idx:
+			b.add_theme_stylebox_override("normal", style_tab_active)
+			b.add_theme_color_override("font_color", Color(1, 1, 1, 1))
+		else:
+			b.add_theme_stylebox_override("normal", style_tab_inactive)
+			b.add_theme_color_override("font_color", Color(0.25, 0.32, 0.42, 1))
 
 func _setup_filters() -> void:
 	opt_dias.clear()
@@ -66,10 +119,49 @@ func _setup_filters() -> void:
 		opt_bairros.add_item(b)
 	opt_bairros.select(0)
 
+func _setup_chips() -> void:
+	var suggestions = ["Arroz", "Feijão", "Açúcar", "Café", "Leite", "Óleo", "Frango", "Carne", "Pão"]
+	for s in suggestions:
+		var chip = Button.new()
+		chip.text = s
+		chip.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		
+		var chip_style = StyleBoxFlat.new()
+		chip_style.bg_color = Color(0.94, 0.96, 0.99, 1)
+		chip_style.border_width_left = 1
+		chip_style.border_width_top = 1
+		chip_style.border_width_right = 1
+		chip_style.border_width_bottom = 1
+		chip_style.border_color = Color(0.82, 0.88, 0.96, 1)
+		chip_style.set_corner_radius_all(12)
+		chip_style.content_margin_left = 12
+		chip_style.content_margin_top = 4
+		chip_style.content_margin_right = 12
+		chip_style.content_margin_bottom = 4
+		
+		var chip_hover = chip_style.duplicate()
+		chip_hover.bg_color = Color(0.88, 0.93, 1, 1)
+		chip_hover.border_color = Color(0.6, 0.75, 0.95, 1)
+		
+		chip.add_theme_stylebox_override("normal", chip_style)
+		chip.add_theme_stylebox_override("hover", chip_hover)
+		chip.add_theme_color_override("font_color", Color(0.12, 0.35, 0.8, 1))
+		chip.add_theme_font_size_override("font_size", 12)
+		
+		chip.pressed.connect(func():
+			input_search.text = s
+			_do_search(s)
+		)
+		chips_container.add_child(chip)
+
 func _setup_events() -> void:
+	nav_btn_search.pressed.connect(func(): _switch_tab(0))
+	nav_btn_cart.pressed.connect(func(): _switch_tab(1))
+	nav_btn_markets.pressed.connect(func(): _switch_tab(2))
+	
 	btn_search.pressed.connect(func(): _do_search(input_search.text))
 	input_search.text_submitted.connect(func(_text): _do_search(input_search.text))
-	cart_badge_btn.pressed.connect(func(): tab_container.current_tab = 1)
+	cart_badge_btn.pressed.connect(func(): _switch_tab(1))
 	btn_clear_cart.pressed.connect(_on_clear_cart_pressed)
 	btn_copy_whatsapp.pressed.connect(_on_copy_whatsapp_pressed)
 	opt_bairros.item_selected.connect(func(_idx): _filter_and_render_results())
@@ -152,7 +244,6 @@ func _on_cart_updated() -> void:
 	_update_cart_ui()
 
 func _update_cart_ui() -> void:
-	# Atualiza o badge do topo
 	var total_items = 0
 	for it in Global.cart_items:
 		total_items += int(it.get("quantidade", 1))
@@ -160,7 +251,6 @@ func _update_cart_ui() -> void:
 	var cart_total = Global.get_cart_total()
 	cart_badge_btn.text = "🛒 Carrinho (%d itens • %s)" % [total_items, Global.format_currency(cart_total)]
 	
-	# Limpa lista do carrinho
 	for child in cart_items_container.get_children():
 		child.queue_free()
 	
@@ -176,7 +266,6 @@ func _update_cart_ui() -> void:
 	empty_cart_label.visible = false
 	lbl_cart_total.text = Global.format_currency(cart_total)
 	
-	# Renderiza itens do carrinho
 	for i in range(Global.cart_items.size()):
 		var item_ui = cart_item_scene.instantiate()
 		cart_items_container.add_child(item_ui)
@@ -187,8 +276,6 @@ func _update_cart_ui() -> void:
 func _calculate_store_comparisons() -> void:
 	_clear_store_comparisons()
 	
-	# Agrupa preços por supermercado
-	# store_totals: { "CASA SANTOS": { "total": float, "count": int } }
 	var store_totals: Dictionary = {}
 	
 	for item in Global.cart_items:
@@ -206,7 +293,6 @@ func _calculate_store_comparisons() -> void:
 	if store_totals.is_empty():
 		return
 	
-	# Ordena estabelecimentos por valor total
 	var stores_arr = []
 	for s_name in store_totals.keys():
 		stores_arr.append({
@@ -218,7 +304,6 @@ func _calculate_store_comparisons() -> void:
 	
 	stores_arr.sort_custom(func(a, b): return a["total"] < b["total"])
 	
-	# Destaque do vencedor
 	var winner = stores_arr[0]
 	lbl_winner_store.text = "🏆 " + winner["nome"]
 	lbl_winner_val.text = Global.format_currency(winner["total"])
@@ -233,23 +318,54 @@ func _calculate_store_comparisons() -> void:
 	else:
 		lbl_winner_economy.text = "Supermercado mais vantajoso para esta compra."
 	
-	# Lista comparativa completa
-	for s in stores_arr:
-		var row = HBoxContainer.new()
-		row.custom_minimum_size = Vector2(0, 36)
+	# Lista comparativa completa com acabamento AAA
+	for i in range(stores_arr.size()):
+		var s = stores_arr[i]
+		var row = PanelContainer.new()
+		row.custom_minimum_size = Vector2(0, 48)
+		
+		var row_style = StyleBoxFlat.new()
+		row_style.bg_color = Color(0.96, 0.975, 0.99, 1)
+		row_style.border_width_left = 1
+		row_style.border_width_top = 1
+		row_style.border_width_right = 1
+		row_style.border_width_bottom = 2
+		row_style.border_color = Color(0.86, 0.9, 0.95, 1)
+		row_style.set_corner_radius_all(12)
+		row_style.content_margin_left = 14
+		row_style.content_margin_top = 10
+		row_style.content_margin_right = 14
+		row_style.content_margin_bottom = 10
+		
+		if i == 0:
+			row_style.bg_color = Color(0.92, 0.98, 0.94, 1)
+			row_style.border_color = Color(0.5, 0.85, 0.65, 1)
+		
+		row.add_theme_stylebox_override("panel", row_style)
+		
+		var hbox = HBoxContainer.new()
+		hbox.add_theme_constant_override("separation", 12)
+		
+		var rank_lbl = Label.new()
+		rank_lbl.text = "#%d" % (i + 1)
+		rank_lbl.add_theme_font_size_override("font_size", 13)
+		rank_lbl.add_theme_color_override("font_color", Color(0.45, 0.52, 0.62, 1) if i > 0 else Color(0.0, 0.6, 0.4, 1))
 		
 		var name_lbl = Label.new()
 		name_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		name_lbl.text = "%s (%s)" % [s["nome"], s["bairro"]]
 		name_lbl.add_theme_font_size_override("font_size", 13)
+		name_lbl.add_theme_color_override("font_color", Color(0.09, 0.14, 0.22, 1))
 		
 		var price_lbl = Label.new()
 		price_lbl.text = Global.format_currency(s["total"])
-		price_lbl.add_theme_font_size_override("font_size", 14)
-		price_lbl.add_theme_color_override("font_color", Color(0.15, 0.95, 0.55, 1))
+		price_lbl.add_theme_font_size_override("font_size", 15)
+		price_lbl.add_theme_color_override("font_color", Color(0.0, 0.65, 0.45, 1) if i == 0 else Color(0.2, 0.3, 0.45, 1))
 		
-		row.add_child(name_lbl)
-		row.add_child(price_lbl)
+		hbox.add_child(rank_lbl)
+		hbox.add_child(name_lbl)
+		hbox.add_child(price_lbl)
+		row.add_child(hbox)
 		store_comparison_container.add_child(row)
 
 func _clear_store_comparisons() -> void:
@@ -263,54 +379,75 @@ func _render_markets_tab() -> void:
 	if known_stores.is_empty():
 		var empty_lbl = Label.new()
 		empty_lbl.text = "Realize pesquisas de produtos para listar os supermercados ativos em Parintins."
+		empty_lbl.add_theme_color_override("font_color", Color(0.45, 0.52, 0.62, 1))
 		markets_list_container.add_child(empty_lbl)
 		return
 	
 	for s_name in known_stores.keys():
 		var data = known_stores[s_name]
 		var panel = PanelContainer.new()
-		panel.custom_minimum_size = Vector2(0, 70)
+		panel.custom_minimum_size = Vector2(0, 78)
 		
 		var style = StyleBoxFlat.new()
-		style.bg_color = Color(0.06, 0.13, 0.1, 0.85)
-		style.set_corner_radius_all(10)
+		style.bg_color = Color(1, 1, 1, 1)
+		style.set_corner_radius_all(16)
 		style.border_width_left = 1
 		style.border_width_right = 1
 		style.border_width_top = 1
-		style.border_width_bottom = 1
-		style.border_color = Color(0.12, 0.38, 0.25, 0.4)
+		style.border_width_bottom = 2
+		style.border_color = Color(0.86, 0.9, 0.95, 1)
+		style.shadow_color = Color(0.08, 0.15, 0.25, 0.06)
+		style.shadow_size = 12
+		style.shadow_offset = Vector2(0, 3)
+		style.content_margin_left = 18
+		style.content_margin_top = 14
+		style.content_margin_right = 18
+		style.content_margin_bottom = 14
 		panel.add_theme_stylebox_override("panel", style)
 		
-		var margin = MarginContainer.new()
-		margin.add_theme_constant_override("margin_left", 14)
-		margin.add_theme_constant_override("margin_top", 10)
-		margin.add_theme_constant_override("margin_right", 14)
-		margin.add_theme_constant_override("margin_bottom", 10)
-		
 		var hbox = HBoxContainer.new()
+		hbox.add_theme_constant_override("separation", 16)
 		
 		var vbox = VBoxContainer.new()
 		vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		vbox.add_theme_constant_override("separation", 3)
 		
 		var store_lbl = Label.new()
 		store_lbl.text = "🏪 " + s_name
-		store_lbl.add_theme_font_size_override("font_size", 15)
-		store_lbl.add_theme_color_override("font_color", Color(0.95, 0.75, 0.25, 1))
+		store_lbl.add_theme_font_size_override("font_size", 16)
+		store_lbl.add_theme_color_override("font_color", Color(0.09, 0.14, 0.22, 1))
 		
 		var addr_lbl = Label.new()
 		addr_lbl.text = data.get("endereco", "Parintins - AM")
 		addr_lbl.add_theme_font_size_override("font_size", 12)
-		addr_lbl.add_theme_color_override("font_color", Color(0.7, 0.8, 0.75, 1))
+		addr_lbl.add_theme_color_override("font_color", Color(0.45, 0.52, 0.62, 1))
 		
 		vbox.add_child(store_lbl)
 		vbox.add_child(addr_lbl)
 		
 		var btn_view = Button.new()
 		btn_view.text = "Ver Preços"
-		btn_view.custom_minimum_size = Vector2(100, 32)
+		btn_view.custom_minimum_size = Vector2(120, 38)
+		btn_view.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		
+		var btn_style = StyleBoxFlat.new()
+		btn_style.bg_color = Color(0, 0.75, 0.55, 1)
+		btn_style.border_width_bottom = 3
+		btn_style.border_color = Color(0, 0.58, 0.42, 1)
+		btn_style.set_corner_radius_all(12)
+		btn_style.content_margin_left = 14
+		btn_style.content_margin_right = 14
+		
+		var btn_hover = btn_style.duplicate()
+		btn_hover.bg_color = Color(0.08, 0.82, 0.62, 1)
+		
+		btn_view.add_theme_stylebox_override("normal", btn_style)
+		btn_view.add_theme_stylebox_override("hover", btn_hover)
+		btn_view.add_theme_color_override("font_color", Color(1, 1, 1, 1))
+		btn_view.add_theme_font_size_override("font_size", 13)
+		
 		btn_view.pressed.connect(func():
-			tab_container.current_tab = 0
-			# Seleciona bairro correspondente se possível
+			_switch_tab(0)
 			var bairro = data.get("bairro", "")
 			for i in range(opt_bairros.item_count):
 				if opt_bairros.get_item_text(i).to_upper() == bairro.to_upper():
@@ -321,8 +458,7 @@ func _render_markets_tab() -> void:
 		
 		hbox.add_child(vbox)
 		hbox.add_child(btn_view)
-		margin.add_child(hbox)
-		panel.add_child(margin)
+		panel.add_child(hbox)
 		markets_list_container.add_child(panel)
 
 func _on_clear_cart_pressed() -> void:
@@ -347,4 +483,4 @@ func _on_copy_whatsapp_pressed() -> void:
 	btn_copy_whatsapp.text = "✓ Lista Copiada!"
 	await get_tree().create_timer(2.0).timeout
 	if is_instance_valid(btn_copy_whatsapp):
-		btn_copy_whatsapp.text = "Copiar para WhatsApp"
+		btn_copy_whatsapp.text = "📲 Copiar Lista Formatada para WhatsApp"

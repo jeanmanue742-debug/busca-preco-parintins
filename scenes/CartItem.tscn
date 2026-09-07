@@ -3,105 +3,124 @@
 [ext_resource type="Script" path="res://scripts/CartItem.gd" id="1_script"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_item"]
-bg_color = Color(0.06, 0.12, 0.09, 0.85)
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.86, 0.9, 0.95, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.08, 0.15, 0.25, 0.06)
+shadow_size = 12
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qty_btn"]
+bg_color = Color(0.93, 0.95, 0.98, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.12, 0.3, 0.2, 0.4)
+border_color = Color(0.82, 0.86, 0.92, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qty_btn"]
-bg_color = Color(0.12, 0.25, 0.18, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_remove_btn"]
-bg_color = Color(0.45, 0.15, 0.15, 0.8)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+bg_color = Color(0.99, 0.92, 0.92, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.96, 0.75, 0.75, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="CartItem" type="PanelContainer"]
-custom_minimum_size = Vector2(0, 68)
+custom_minimum_size = Vector2(0, 72)
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_item")
 script = ExtResource("1_script")
 
-[node name="Margin" type="MarginContainer" parent="."]
-layout_mode = 2
-theme_override_constants/margin_left = 14
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 14
-theme_override_constants/margin_bottom = 10
-
-[node name="HBox" type="HBoxContainer" parent="Margin"]
+[node name="HBox" type="HBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Info" type="VBoxContainer" parent="Margin/HBox"]
+[node name="Info" type="VBoxContainer" parent="HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 2
 
-[node name="Name" type="Label" parent="Margin/HBox/Info"]
+[node name="Name" type="Label" parent="HBox/Info"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.09, 0.14, 0.22, 1)
 theme_override_font_sizes/font_size = 14
 text = "Nome do Produto"
 
-[node name="Store" type="Label" parent="Margin/HBox/Info"]
+[node name="Store" type="Label" parent="HBox/Info"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.9, 0.75, 0.2, 1)
-theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.15, 0.38, 0.85, 1)
+theme_override_font_sizes/font_size = 12
 text = "Supermercado Exemplo"
 
-[node name="UnitPrice" type="Label" parent="Margin/HBox/Info"]
+[node name="UnitPrice" type="Label" parent="HBox/Info"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.65, 0.75, 0.7, 1)
+theme_override_colors/font_color = Color(0.45, 0.52, 0.62, 1)
 theme_override_font_sizes/font_size = 11
 text = "R$ 0,00 un."
 
-[node name="QtyControls" type="HBoxContainer" parent="Margin/HBox"]
+[node name="QtyControls" type="HBoxContainer" parent="HBox"]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="BtnMinus" type="Button" parent="Margin/HBox/QtyControls"]
-custom_minimum_size = Vector2(30, 30)
+[node name="BtnMinus" type="Button" parent="HBox/QtyControls"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.15, 0.2, 0.3, 1)
+theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_qty_btn")
 text = "-"
 
-[node name="QtyLabel" type="Label" parent="Margin/HBox/QtyControls"]
-custom_minimum_size = Vector2(28, 0)
+[node name="QtyLabel" type="Label" parent="HBox/QtyControls"]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.09, 0.14, 0.22, 1)
 theme_override_font_sizes/font_size = 14
 text = "1"
 horizontal_alignment = 1
 
-[node name="BtnPlus" type="Button" parent="Margin/HBox/QtyControls"]
-custom_minimum_size = Vector2(30, 30)
+[node name="BtnPlus" type="Button" parent="HBox/QtyControls"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.15, 0.2, 0.3, 1)
+theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_qty_btn")
 text = "+"
 
-[node name="Total" type="Label" parent="Margin/HBox"]
+[node name="Total" type="Label" parent="HBox"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.15, 0.95, 0.55, 1)
+theme_override_colors/font_color = Color(0, 0.65, 0.45, 1)
 theme_override_font_sizes/font_size = 16
 text = "R$ 0,00"
 horizontal_alignment = 2
 
-[node name="BtnRemove" type="Button" parent="Margin/HBox"]
-custom_minimum_size = Vector2(75, 30)
+[node name="BtnRemove" type="Button" parent="HBox"]
+custom_minimum_size = Vector2(80, 32)
 layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.82, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 11
 theme_override_styles/normal = SubResource("StyleBoxFlat_remove_btn")
-text = "Remover"
+text = "✕ Remover"

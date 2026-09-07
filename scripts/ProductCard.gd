@@ -3,13 +3,13 @@ extends PanelContainer
 # Dados do produto exibido no card
 var product_data: Dictionary = {}
 
-@onready var lbl_price: Label = $Margin/VBox/Header/Price
-@onready var lbl_badge: Label = $Margin/VBox/Header/Badge
-@onready var lbl_title: Label = $Margin/VBox/Title
-@onready var lbl_store: Label = $Margin/VBox/StoreInfo/Store
-@onready var lbl_bairro: Label = $Margin/VBox/StoreInfo/Bairro
-@onready var lbl_time: Label = $Margin/VBox/Footer/Time
-@onready var btn_add: Button = $Margin/VBox/Footer/BtnAdd
+@onready var lbl_price: Label = $VBox/Header/Price
+@onready var lbl_badge: Label = $VBox/Header/Badge
+@onready var lbl_title: Label = $VBox/Title
+@onready var lbl_store: Label = $VBox/StoreInfo/Store
+@onready var lbl_bairro: Label = $VBox/StoreInfo/Bairro
+@onready var lbl_time: Label = $VBox/Footer/Time
+@onready var btn_add: Button = $VBox/Footer/BtnAdd
 
 func setup(data: Dictionary, is_cheapest: bool = false) -> void:
 	product_data = data

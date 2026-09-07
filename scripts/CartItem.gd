@@ -3,14 +3,14 @@ extends PanelContainer
 var item_index: int = -1
 var item_data: Dictionary = {}
 
-@onready var lbl_name: Label = $Margin/HBox/Info/Name
-@onready var lbl_store: Label = $Margin/HBox/Info/Store
-@onready var lbl_unit_price: Label = $Margin/HBox/Info/UnitPrice
-@onready var lbl_qty: Label = $Margin/HBox/QtyControls/QtyLabel
-@onready var lbl_total: Label = $Margin/HBox/Total
-@onready var btn_minus: Button = $Margin/HBox/QtyControls/BtnMinus
-@onready var btn_plus: Button = $Margin/HBox/QtyControls/BtnPlus
-@onready var btn_remove: Button = $Margin/HBox/BtnRemove
+@onready var lbl_name: Label = $HBox/Info/Name
+@onready var lbl_store: Label = $HBox/Info/Store
+@onready var lbl_unit_price: Label = $HBox/Info/UnitPrice
+@onready var lbl_qty: Label = $HBox/QtyControls/QtyLabel
+@onready var lbl_total: Label = $HBox/Total
+@onready var btn_minus: Button = $HBox/QtyControls/BtnMinus
+@onready var btn_plus: Button = $HBox/QtyControls/BtnPlus
+@onready var btn_remove: Button = $HBox/BtnRemove
 
 func setup(index: int, data: Dictionary) -> void:
 	item_index = index

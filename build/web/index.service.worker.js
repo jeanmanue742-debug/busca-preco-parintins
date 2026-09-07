@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1788756554|5825220';
+const CACHE_VERSION = '1788788964|5720980';
 /** @type {string} */
 const CACHE_PREFIX = 'Busca Preço Pari-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;

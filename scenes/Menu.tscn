@@ -1,85 +1,195 @@
 [gd_scene format=3 uid="uid://df6e22x8molcl"]
 
 [ext_resource type="Script" path="res://scripts/Menu.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/Logo/Logo.png" id="2_logo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.93, 0.95, 0.98, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
-bg_color = Color(0.04, 0.1, 0.07, 0.95)
+content_margin_left = 22.0
+content_margin_top = 16.0
+content_margin_right = 22.0
+content_margin_bottom = 16.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.86, 0.9, 0.95, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0.08, 0.15, 0.25, 0.08)
+shadow_size = 16
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_badge_city"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.88, 0.93, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.12, 0.38, 0.25, 0.4)
+border_color = Color(0.75, 0.85, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cart_badge"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0.75, 0.55, 1)
+border_width_bottom = 3
+border_color = Color(0, 0.58, 0.42, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0.75, 0.55, 0.3)
+shadow_size = 10
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_active"]
+content_margin_left = 20.0
+content_margin_top = 12.0
+content_margin_right = 20.0
+content_margin_bottom = 12.0
+bg_color = Color(0.15, 0.42, 0.92, 1)
+border_width_bottom = 3
+border_color = Color(0.08, 0.28, 0.72, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0.15, 0.42, 0.92, 0.3)
+shadow_size = 8
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_inactive"]
+content_margin_left = 20.0
+content_margin_top = 12.0
+content_margin_right = 20.0
+content_margin_bottom = 12.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.86, 0.9, 0.95, 1)
 corner_radius_top_left = 14
 corner_radius_top_right = 14
 corner_radius_bottom_right = 14
 corner_radius_bottom_left = 14
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_badge_city"]
-bg_color = Color(0.1, 0.28, 0.2, 0.8)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+content_margin_left = 20.0
+content_margin_top = 18.0
+content_margin_right = 20.0
+content_margin_bottom = 18.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.86, 0.9, 0.95, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_color = Color(0.08, 0.15, 0.25, 0.08)
+shadow_size = 16
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.96, 0.97, 0.99, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.15, 0.65, 0.4, 0.5)
+border_color = Color(0.82, 0.86, 0.92, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_search"]
+content_margin_left = 22.0
+content_margin_top = 10.0
+content_margin_right = 22.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0.75, 0.55, 1)
+border_width_bottom = 3
+border_color = Color(0, 0.58, 0.42, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0.75, 0.55, 0.3)
+shadow_size = 8
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_winner_card"]
+content_margin_left = 22.0
+content_margin_top = 20.0
+content_margin_right = 22.0
+content_margin_bottom = 20.0
+bg_color = Color(0, 0.68, 0.5, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 3
+border_color = Color(0, 0.52, 0.38, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
-expand_margin_left = 12.0
-expand_margin_top = 4.0
-expand_margin_right = 12.0
-expand_margin_bottom = 4.0
+shadow_color = Color(0, 0.68, 0.5, 0.35)
+shadow_size = 18
+shadow_offset = Vector2(0, 6)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cart_badge"]
-bg_color = Color(0.08, 0.55, 0.32, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whatsapp_btn"]
+content_margin_left = 20.0
+content_margin_top = 12.0
+content_margin_right = 20.0
+content_margin_bottom = 12.0
+bg_color = Color(0.15, 0.72, 0.35, 1)
+border_width_bottom = 3
+border_color = Color(0.1, 0.55, 0.25, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0.15, 0.72, 0.35, 0.3)
+shadow_size = 10
+shadow_offset = Vector2(0, 3)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_search"]
-bg_color = Color(0.1, 0.6, 0.35, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_summary_card"]
-bg_color = Color(0.06, 0.13, 0.1, 0.9)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_clear_btn"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.98, 0.92, 0.92, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.15, 0.45, 0.3, 0.4)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_winner_card"]
-bg_color = Color(0.07, 0.18, 0.12, 0.95)
-border_width_left = 1.5
-border_width_top = 1.5
-border_width_right = 1.5
-border_width_bottom = 1.5
-border_color = Color(0.15, 0.95, 0.55, 0.6)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-shadow_color = Color(0.1, 0.8, 0.4, 0.2)
-shadow_size = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whatsapp_btn"]
-bg_color = Color(0.15, 0.65, 0.3, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_clear_btn"]
-bg_color = Color(0.35, 0.15, 0.15, 0.8)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+border_width_bottom = 2
+border_color = Color(0.94, 0.75, 0.75, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -90,144 +200,204 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.02, 0.05, 0.03, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 12
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
 
-[node name="Header" type="PanelContainer" parent="VBox"]
+[node name="MainVBox" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="PanelContainer" parent="Margin/MainVBox"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_header")
 
-[node name="Margin" type="MarginContainer" parent="VBox/Header"]
+[node name="HBox" type="HBoxContainer" parent="Margin/MainVBox/Header"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 16
+theme_override_constants/separation = 16
 
-[node name="VBox" type="VBoxContainer" parent="VBox/Header/Margin"]
+[node name="Logo" type="TextureRect" parent="Margin/MainVBox/Header/HBox"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_constants/separation = 12
+texture = ExtResource("2_logo")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="TopBar" type="HBoxContainer" parent="VBox/Header/Margin/VBox"]
-layout_mode = 2
-
-[node name="TitleBox" type="VBoxContainer" parent="VBox/Header/Margin/VBox/TopBar"]
+[node name="TitleBox" type="VBoxContainer" parent="Margin/MainVBox/Header/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 2
 
-[node name="Title" type="Label" parent="VBox/Header/Margin/VBox/TopBar/TitleBox"]
+[node name="Title" type="Label" parent="Margin/MainVBox/Header/HBox/TitleBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 24
-text = "BUSCA PREÇO PARINTINS"
+theme_override_colors/font_color = Color(0.08, 0.15, 0.3, 1)
+theme_override_font_sizes/font_size = 22
+text = "Busca Preço Parintins"
 
-[node name="Subtitle" type="Label" parent="VBox/Header/Margin/VBox/TopBar/TitleBox"]
+[node name="Subtitle" type="Label" parent="Margin/MainVBox/Header/HBox/TitleBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.65, 0.78, 0.7, 1)
+theme_override_colors/font_color = Color(0.45, 0.52, 0.62, 1)
 theme_override_font_sizes/font_size = 12
-text = "Preços Oficiais em Tempo Real via SEFAZ-AM • Parintins / AM"
+text = "Preços e Notas Fiscais da SEFAZ-AM atualizados em tempo real"
 
-[node name="CityBadge" type="Label" parent="VBox/Header/Margin/VBox/TopBar"]
+[node name="CityBadge" type="PanelContainer" parent="Margin/MainVBox/Header/HBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.95, 0.6, 1)
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxFlat_badge_city")
-text = "Parintins - AM"
-horizontal_alignment = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_badge_city")
 
-[node name="Spacer" type="Control" parent="VBox/Header/Margin/VBox/TopBar"]
-custom_minimum_size = Vector2(16, 0)
+[node name="CityLabel" type="Label" parent="Margin/MainVBox/Header/HBox/CityBadge"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.08, 0.35, 0.85, 1)
+theme_override_font_sizes/font_size = 13
+text = "📍 Parintins - AM"
 
-[node name="BtnCartBadge" type="Button" parent="VBox/Header/Margin/VBox/TopBar"]
+[node name="BtnCartBadge" type="Button" parent="Margin/MainVBox/Header/HBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(230, 36)
 layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_cart_badge")
-text = "Carrinho (0 itens • R$ 0,00)"
+text = "🛒 Carrinho (0 itens • R$ 0,00)"
 
-[node name="SearchRow" type="HBoxContainer" parent="VBox/Header/Margin/VBox"]
+[node name="NavBar" type="HBoxContainer" parent="Margin/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="NavBtnSearch" type="Button" parent="Margin/MainVBox/NavBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab_active")
+text = "🔍 Pesquisar Produtos"
+
+[node name="NavBtnCart" type="Button" parent="Margin/MainVBox/NavBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.25, 0.32, 0.42, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab_inactive")
+text = "🛒 Carrinho & Comparador"
+
+[node name="NavBtnMarkets" type="Button" parent="Margin/MainVBox/NavBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.25, 0.32, 0.42, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab_inactive")
+text = "🏪 Supermercados de Parintins"
+
+[node name="TabContainer" type="TabContainer" parent="Margin/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+tabs_visible = false
+
+[node name="TabSearch" type="VBoxContainer" parent="Margin/MainVBox/TabContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="SearchCard" type="PanelContainer" parent="Margin/MainVBox/TabContainer/TabSearch"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="Margin/MainVBox/TabContainer/TabSearch/SearchCard"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ControlsHBox" type="HBoxContainer" parent="Margin/MainVBox/TabContainer/TabSearch/SearchCard/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="InputSearch" type="LineEdit" parent="VBox/Header/Margin/VBox/SearchRow"]
+[node name="InputSearch" type="LineEdit" parent="Margin/MainVBox/TabContainer/TabSearch/SearchCard/VBox/ControlsHBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.09, 0.14, 0.22, 1)
+theme_override_colors/font_placeholder_color = Color(0.55, 0.62, 0.72, 1)
 theme_override_font_sizes/font_size = 14
-placeholder_text = "Digite o produto (ex: arroz, feijão, café, leite, açúcar, óleo...)"
-clear_button_enabled = true
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+placeholder_text = "Digite o nome do produto (ex: arroz, leite, café, feijão, frango...)"
 
-[node name="OptDias" type="OptionButton" parent="VBox/Header/Margin/VBox/SearchRow"]
+[node name="OptDias" type="OptionButton" parent="Margin/MainVBox/TabContainer/TabSearch/SearchCard/VBox/ControlsHBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 0)
+custom_minimum_size = Vector2(160, 42)
 layout_mode = 2
-
-[node name="OptBairros" type="OptionButton" parent="VBox/Header/Margin/VBox/SearchRow"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(170, 0)
-layout_mode = 2
-
-[node name="BtnSearch" type="Button" parent="VBox/Header/Margin/VBox/SearchRow"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(120, 38)
-layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.15, 0.22, 0.35, 1)
 theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+
+[node name="OptBairros" type="OptionButton" parent="Margin/MainVBox/TabContainer/TabSearch/SearchCard/VBox/ControlsHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 42)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.15, 0.22, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+
+[node name="BtnSearch" type="Button" parent="Margin/MainVBox/TabContainer/TabSearch/SearchCard/VBox/ControlsHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 42)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_search")
-text = "Pesquisar"
+text = "Buscar Preços"
 
-[node name="LblStatus" type="Label" parent="VBox/Header/Margin/VBox"]
+[node name="ChipsContainer" type="HBoxContainer" parent="Margin/MainVBox/TabContainer/TabSearch/SearchCard/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.85, 0.75, 1)
+theme_override_constants/separation = 8
+
+[node name="ChipsLabel" type="Label" parent="Margin/MainVBox/TabContainer/TabSearch/SearchCard/VBox/ChipsContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.52, 0.62, 1)
 theme_override_font_sizes/font_size = 12
-text = "Pronto para pesquisar produtos em Parintins."
+text = "Sugestões rápidas:"
 
-[node name="TabContainer" type="TabContainer" parent="VBox"]
+[node name="StatusHBox" type="HBoxContainer" parent="Margin/MainVBox/TabContainer/TabSearch"]
+layout_mode = 2
+
+[node name="LblStatus" type="Label" parent="Margin/MainVBox/TabContainer/TabSearch/StatusHBox"]
 unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-tab_alignment = 1
-current_tab = 0
-
-[node name="Pesquisa" type="Control" parent="VBox/TabContainer"]
-layout_mode = 2
-
-[node name="Scroll" type="ScrollContainer" parent="VBox/TabContainer/Pesquisa"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Margin" type="MarginContainer" parent="VBox/TabContainer/Pesquisa/Scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+theme_override_colors/font_color = Color(0.15, 0.35, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Buscando preços de 'arroz' na SEFAZ (Parintins - AM)..."
 
-[node name="GridResults" type="GridContainer" parent="VBox/TabContainer/Pesquisa/Scroll/Margin"]
+[node name="ScrollResults" type="ScrollContainer" parent="Margin/MainVBox/TabContainer/TabSearch"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="GridResults" type="GridContainer" parent="Margin/MainVBox/TabContainer/TabSearch/ScrollResults"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -236,219 +406,215 @@ theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 3
 
-[node name="EmptySearch" type="PanelContainer" parent="VBox/TabContainer/Pesquisa"]
+[node name="EmptySearch" type="PanelContainer" parent="Margin/MainVBox/TabContainer/TabSearch"]
 unique_name_in_owner = true
 visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -60.0
-offset_right = 200.0
-offset_bottom = 60.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="VBox/TabContainer/Pesquisa/EmptySearch"]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.8, 0.75, 1)
-theme_override_font_sizes/font_size = 14
-text = "Nenhum preço encontrado para este produto no bairro selecionado.
-Tente selecionar 'Todos os Bairros' ou alterar o período."
-horizontal_alignment = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
 
-[node name="Carrinho" type="Control" parent="VBox/TabContainer"]
-visible = false
+[node name="Center" type="CenterContainer" parent="Margin/MainVBox/TabContainer/TabSearch/EmptySearch"]
 layout_mode = 2
 
-[node name="Scroll" type="ScrollContainer" parent="VBox/TabContainer/Carrinho"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Margin" type="MarginContainer" parent="VBox/TabContainer/Carrinho/Scroll"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="HBox" type="HBoxContainer" parent="VBox/TabContainer/Carrinho/Scroll/Margin"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/separation = 20
-
-[node name="LeftCol" type="VBoxContainer" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.6
-theme_override_constants/separation = 12
-
-[node name="Title" type="Label" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/LeftCol"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Minha Lista de Compras"
-
-[node name="EmptyCartLabel" type="Label" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/LeftCol"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.65, 0.75, 0.7, 1)
-text = "Sua lista está vazia. Pesquise produtos na aba anterior e clique em '+ Adicionar à Lista'."
-
-[node name="ItemsList" type="VBoxContainer" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/LeftCol"]
-unique_name_in_owner = true
+[node name="VBox" type="VBoxContainer" parent="Margin/MainVBox/TabContainer/TabSearch/EmptySearch/Center"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="RightCol" type="VBoxContainer" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox"]
+[node name="Icon" type="Label" parent="Margin/MainVBox/TabContainer/TabSearch/EmptySearch/Center/VBox"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 14
+theme_override_font_sizes/font_size = 36
+text = "🔍"
+horizontal_alignment = 1
 
-[node name="WinnerCard" type="PanelContainer" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol"]
+[node name="Msg" type="Label" parent="Margin/MainVBox/TabContainer/TabSearch/EmptySearch/Center/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25, 0.32, 0.42, 1)
+theme_override_font_sizes/font_size = 15
+text = "Nenhum resultado encontrado em Parintins."
+horizontal_alignment = 1
+
+[node name="SubMsg" type="Label" parent="Margin/MainVBox/TabContainer/TabSearch/EmptySearch/Center/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.58, 0.68, 1)
+theme_override_font_sizes/font_size = 13
+text = "Tente buscar termos mais genéricos como 'feijão', 'café' ou selecione 'Todos os Bairros'."
+horizontal_alignment = 1
+
+[node name="TabCart" type="HBoxContainer" parent="Margin/MainVBox/TabContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="LeftColumn" type="VBoxContainer" parent="Margin/MainVBox/TabContainer/TabCart"]
+custom_minimum_size = Vector2(440, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="WinnerCard" type="PanelContainer" parent="Margin/MainVBox/TabContainer/TabCart/LeftColumn"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_winner_card")
 
-[node name="Margin" type="MarginContainer" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol/WinnerCard"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBox" type="VBoxContainer" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol/WinnerCard/Margin"]
+[node name="VBox" type="VBoxContainer" parent="Margin/MainVBox/TabContainer/TabCart/LeftColumn/WinnerCard"]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="Header" type="Label" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol/WinnerCard/Margin/VBox"]
+[node name="Badge" type="Label" parent="Margin/MainVBox/TabContainer/TabCart/LeftColumn/WinnerCard/VBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.95, 0.6, 1)
-theme_override_font_sizes/font_size = 12
-text = "SUPERMERCADO MAIS BARATO"
+theme_override_colors/font_color = Color(0.99, 0.95, 0.75, 1)
+theme_override_font_sizes/font_size = 13
+text = "🏆 SUPERMERCADO MAIS BARATO DE PARINTINS"
 
-[node name="LblWinnerName" type="Label" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol/WinnerCard/Margin/VBox"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "Adicione itens à lista"
-
-[node name="LblWinnerPrice" type="Label" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol/WinnerCard/Margin/VBox"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.15, 0.95, 0.55, 1)
-theme_override_font_sizes/font_size = 24
-text = "R$ 0,00"
-
-[node name="LblWinnerEconomy" type="Label" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol/WinnerCard/Margin/VBox"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.85, 0.75, 1)
-theme_override_font_sizes/font_size = 12
-text = "Adicione produtos para comparar."
-autowrap_mode = 3
-
-[node name="SummaryCard" type="PanelContainer" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_summary_card")
-
-[node name="Margin" type="MarginContainer" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol/SummaryCard"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 14
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 14
-
-[node name="VBox" type="VBoxContainer" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol/SummaryCard/Margin"]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="LblTotalHeader" type="Label" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol/SummaryCard/Margin/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.8, 0.75, 1)
-theme_override_font_sizes/font_size = 12
-text = "Valor Total Estimado"
-
-[node name="LblTotalVal" type="Label" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol/SummaryCard/Margin/VBox"]
+[node name="LblWinnerName" type="Label" parent="Margin/MainVBox/TabContainer/TabCart/LeftColumn/WinnerCard/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 20
+text = "Adicione itens ao carrinho"
+
+[node name="LblWinnerPrice" type="Label" parent="Margin/MainVBox/TabContainer/TabCart/LeftColumn/WinnerCard/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
 text = "R$ 0,00"
 
-[node name="ComparisonCard" type="PanelContainer" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol"]
+[node name="LblWinnerEconomy" type="Label" parent="Margin/MainVBox/TabContainer/TabCart/LeftColumn/WinnerCard/VBox"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_summary_card")
-
-[node name="Margin" type="MarginContainer" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol/ComparisonCard"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 14
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 14
-
-[node name="VBox" type="VBoxContainer" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol/ComparisonCard/Margin"]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="Title" type="Label" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol/ComparisonCard/Margin/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.9, 0.75, 0.25, 1)
+theme_override_colors/font_color = Color(0.9, 1, 0.95, 1)
 theme_override_font_sizes/font_size = 13
-text = "Comparativo de Estabelecimentos"
+text = "Adicione produtos para comparar os supermercados."
+autowrap_mode = 3
 
-[node name="StoreList" type="VBoxContainer" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol/ComparisonCard/Margin/VBox"]
+[node name="StoreComparisonCard" type="PanelContainer" parent="Margin/MainVBox/TabContainer/TabCart/LeftColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="Margin/MainVBox/TabContainer/TabCart/LeftColumn/StoreComparisonCard"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Margin/MainVBox/TabContainer/TabCart/LeftColumn/StoreComparisonCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.09, 0.14, 0.22, 1)
+theme_override_font_sizes/font_size = 15
+text = "📊 Comparativo por Estabelecimento"
+
+[node name="ScrollStores" type="ScrollContainer" parent="Margin/MainVBox/TabContainer/TabCart/LeftColumn/StoreComparisonCard/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="StoreList" type="VBoxContainer" parent="Margin/MainVBox/TabContainer/TabCart/LeftColumn/StoreComparisonCard/VBox/ScrollStores"]
 unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="BtnCopyWhatsApp" type="Button" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 38)
-layout_mode = 2
-theme_override_font_sizes/font_size = 13
-theme_override_styles/normal = SubResource("StyleBoxFlat_whatsapp_btn")
-text = "Copiar para WhatsApp"
-
-[node name="BtnClearCart" type="Button" parent="VBox/TabContainer/Carrinho/Scroll/Margin/HBox/RightCol"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 34)
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxFlat_clear_btn")
-text = "Limpar Lista"
-
-[node name="Mercados" type="Control" parent="VBox/TabContainer"]
-visible = false
-layout_mode = 2
-
-[node name="Scroll" type="ScrollContainer" parent="VBox/TabContainer/Mercados"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Margin" type="MarginContainer" parent="VBox/TabContainer/Mercados/Scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/separation = 8
 
-[node name="MarketsList" type="VBoxContainer" parent="VBox/TabContainer/Mercados/Scroll/Margin"]
+[node name="RightColumn" type="VBoxContainer" parent="Margin/MainVBox/TabContainer/TabCart"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="CartItemsCard" type="PanelContainer" parent="Margin/MainVBox/TabContainer/TabCart/RightColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="Margin/MainVBox/TabContainer/TabCart/RightColumn/CartItemsCard"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CartHeader" type="HBoxContainer" parent="Margin/MainVBox/TabContainer/TabCart/RightColumn/CartItemsCard/VBox"]
+layout_mode = 2
+
+[node name="CartTitle" type="Label" parent="Margin/MainVBox/TabContainer/TabCart/RightColumn/CartItemsCard/VBox/CartHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.09, 0.14, 0.22, 1)
+theme_override_font_sizes/font_size = 16
+text = "🛒 Produtos Adicionados à Lista"
+
+[node name="LblTotalVal" type="Label" parent="Margin/MainVBox/TabContainer/TabCart/RightColumn/CartItemsCard/VBox/CartHeader"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.65, 0.45, 1)
+theme_override_font_sizes/font_size = 20
+text = "R$ 0,00"
+
+[node name="ScrollCart" type="ScrollContainer" parent="Margin/MainVBox/TabContainer/TabCart/RightColumn/CartItemsCard/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ItemsList" type="VBoxContainer" parent="Margin/MainVBox/TabContainer/TabCart/RightColumn/CartItemsCard/VBox/ScrollCart"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="EmptyCartLabel" type="Label" parent="Margin/MainVBox/TabContainer/TabCart/RightColumn/CartItemsCard/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.58, 0.68, 1)
+theme_override_font_sizes/font_size = 14
+text = "Sua lista está vazia. Volte na aba 'Pesquisar Produtos' e clique em '+ Adicionar à Lista'."
+horizontal_alignment = 1
+
+[node name="ActionsCard" type="PanelContainer" parent="Margin/MainVBox/TabContainer/TabCart/RightColumn"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="HBox" type="HBoxContainer" parent="Margin/MainVBox/TabContainer/TabCart/RightColumn/ActionsCard"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BtnClearCart" type="Button" parent="Margin/MainVBox/TabContainer/TabCart/RightColumn/ActionsCard/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 44)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.85, 0.25, 0.25, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_clear_btn")
+text = "🗑 Limpar Lista"
+
+[node name="BtnCopyWhatsApp" type="Button" parent="Margin/MainVBox/TabContainer/TabCart/RightColumn/ActionsCard/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_whatsapp_btn")
+text = "📲 Copiar Lista Formatada para WhatsApp"
+
+[node name="TabMarkets" type="VBoxContainer" parent="Margin/MainVBox/TabContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="MarketsCard" type="PanelContainer" parent="Margin/MainVBox/TabContainer/TabMarkets"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="Margin/MainVBox/TabContainer/TabMarkets/MarketsCard"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Margin/MainVBox/TabContainer/TabMarkets/MarketsCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.09, 0.14, 0.22, 1)
+theme_override_font_sizes/font_size = 16
+text = "🏪 Supermercados e Mercados Detectados em Parintins - AM"
+
+[node name="ScrollMarkets" type="ScrollContainer" parent="Margin/MainVBox/TabContainer/TabMarkets/MarketsCard/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="MarketsList" type="VBoxContainer" parent="Margin/MainVBox/TabContainer/TabMarkets/MarketsCard/VBox/ScrollMarkets"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
