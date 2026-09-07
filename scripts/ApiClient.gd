@@ -19,16 +19,24 @@ func search(query: String, dias: String = "168", municipio: String = "Parintins"
 	var clean_mun = municipio.strip_edges().uri_encode()
 	var url = "%s?q=%s&municipio=%s&dias=%s" % [Global.api_base_url, clean_q, clean_mun, dias]
 	
-	var headers = [
+	# Cancela requisição anterior se ainda estiver em andamento
+	if http_request.get_http_client_status() != HTTPClient.STATUS_DISCONNECTED:
+		http_request.cancel_request()
+	
+	var headers: PackedStringArray = PackedStringArray([
 		"User-Agent: BuscaPrecoParintins/1.0",
 		"Accept: application/json"
-	]
+	])
 	
 	var err = http_request.request(url, headers, HTTPClient.METHOD_GET)
 	if err != OK:
 		Global.search_error.emit("Erro ao iniciar requisição: Código %d" % err)
 
-func _on_request_completed(_result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
+func _on_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
+	if result != HTTPRequest.RESULT_SUCCESS:
+		Global.search_error.emit("Erro de conexão (Resultado %d). Verifique sua internet." % result)
+		return
+	
 	if response_code != 200:
 		Global.search_error.emit("Falha ao buscar preços na SEFAZ (Código HTTP %d)" % response_code)
 		return

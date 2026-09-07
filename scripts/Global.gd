@@ -35,9 +35,13 @@ var cart_items: Array[Dictionary] = []
 var search_history: Array[String] = []
 
 func _ready() -> void:
-	# Se estiver rodando na Web, usa URL relativa para evitar CORS
+	# No navegador, detecta a origem para montar a URL absoluta válida (HTTPRequest exige http:// ou https://)
 	if OS.has_feature("web"):
-		api_base_url = "/api/search"
+		var origin_val = JavaScriptBridge.eval("typeof window !== 'undefined' && window.location && window.location.origin ? window.location.origin : ''")
+		if origin_val != null and str(origin_val).begins_with("http"):
+			api_base_url = str(origin_val) + "/api/search"
+		else:
+			api_base_url = "https://busca-preco-parintins.vercel.app/api/search"
 
 func add_to_cart(item: Dictionary, qty: int = 1) -> void:
 	# Verifica se já existe produto com o mesmo nome e estabelecimento no carrinho

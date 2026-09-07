@@ -59,7 +59,9 @@ export default async function handler(req, res) {
       return res.status(502).json({ error: `Erro na SEFAZ: HTTP ${response.status}` });
     }
 
-    const html = await response.text();
+    const buffer = await response.arrayBuffer();
+    const decoder = new TextDecoder('iso-8859-1');
+    const html = decoder.decode(buffer);
     const items = parseSefazHtml(html, municipio);
 
     return res.status(200).json({
@@ -150,7 +152,6 @@ function parseSefazHtml(html, defaultMunicipio) {
 function cleanText(str) {
   if (!str) return '';
   return str
-    .replace(/H\uFFFD|H/g, 'Há')
     .replace(/&amp;/g, '&')
     .replace(/&aacute;/g, 'á')
     .replace(/&eacute;/g, 'é')
