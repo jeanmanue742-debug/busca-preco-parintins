@@ -1,7 +1,7 @@
 extends Node
 
 signal cart_updated
-signal search_completed(results)
+signal search_completed(results, has_more, next_page)
 signal search_error(message)
 
 # URL da API do Busca Preço Parintins (Vercel ou local)

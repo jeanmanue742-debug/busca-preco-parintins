@@ -27,49 +27,83 @@ export default async function handler(req, res) {
   const query = req.query.q || req.body?.q || '';
   const municipio = req.query.municipio || req.body?.municipio || 'Parintins';
   const dias = req.query.dias || req.body?.dias || '168'; // 168h = 7 dias, 48h = 2 dias, 24h = 1 dia
-  const page = req.query.page || req.body?.page || '1';
+  const startPage = parseInt(req.query.page || req.body?.page || '1', 10);
+  const maxPages = parseInt(req.query.max_pages || req.body?.max_pages || '5', 10);
 
   if (!query || query.trim().length === 0) {
     return res.status(400).json({ error: 'Termo de busca (q) é obrigatório' });
   }
 
   try {
-    const params = new URLSearchParams();
-    params.append('descricaoProd', query.trim());
-    params.append('municipio', municipio);
-    params.append('tipoConsulta', dias);
-    params.append('distancia', '9999');
-    params.append('cdGtin', '');
-    params.append('latitude', '');
-    params.append('longitude', '');
+    const allItems = [];
+    const seenIds = new Set();
+    let lastPage = startPage;
+    let hasMore = false;
 
-    const sefazUrl = `https://buscapreco.sefaz.am.gov.br/item/grupo/page/${page}`;
-    
-    const response = await fetch(sefazUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-      },
-      body: params.toString()
-    });
+    for (let p = startPage; p < startPage + maxPages; p++) {
+      const params = new URLSearchParams();
+      params.append('descricaoProd', query.trim());
+      params.append('municipio', municipio);
+      params.append('tipoConsulta', dias);
+      params.append('distancia', '9999');
+      params.append('cdGtin', '');
+      params.append('latitude', '');
+      params.append('longitude', '');
 
-    if (!response.ok) {
-      return res.status(502).json({ error: `Erro na SEFAZ: HTTP ${response.status}` });
+      const sefazUrl = `https://buscapreco.sefaz.am.gov.br/item/grupo/page/${p}`;
+      const response = await fetch(sefazUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+        },
+        body: params.toString()
+      });
+
+      if (!response.ok) break;
+
+      const buffer = await response.arrayBuffer();
+      const decoder = new TextDecoder('iso-8859-1');
+      const html = decoder.decode(buffer);
+      const items = parseSefazHtml(html, municipio);
+
+      lastPage = p;
+      if (items.length === 0) {
+        hasMore = false;
+        break;
+      }
+
+      for (const item of items) {
+        if (!seenIds.has(item.id)) {
+          seenIds.add(item.id);
+          allItems.push(item);
+        }
+      }
+
+      // Se a página retornou menos de 12 itens, era a última página de Parintins
+      if (items.length < 12) {
+        hasMore = false;
+        break;
+      }
+
+      if (p === startPage + maxPages - 1) {
+        hasMore = true;
+      }
     }
 
-    const buffer = await response.arrayBuffer();
-    const decoder = new TextDecoder('iso-8859-1');
-    const html = decoder.decode(buffer);
-    const items = parseSefazHtml(html, municipio);
+    // Ordena todos os itens encontrados pelo menor preço (mais barato primeiro)
+    allItems.sort((a, b) => a.preco - b.preco);
 
     return res.status(200).json({
       query: query.trim(),
       municipio,
       dias,
-      total: items.length,
-      items
+      page: startPage,
+      nextPage: hasMore ? lastPage + 1 : null,
+      hasMore,
+      total: allItems.length,
+      items: allItems
     });
 
   } catch (err) {

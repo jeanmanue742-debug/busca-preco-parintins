@@ -21,6 +21,7 @@ var api_client: Node
 # Aba 1 - Pesquisa
 @onready var results_container: GridContainer = %GridResults
 @onready var empty_search_panel: PanelContainer = %EmptySearch
+@onready var btn_load_more: Button = %BtnLoadMore
 
 # Aba 2 - Carrinho & Comparador
 @onready var cart_items_container: VBoxContainer = %ItemsList
@@ -44,9 +45,14 @@ var cart_item_scene = preload("res://scenes/CartItem.tscn")
 var style_tab_active: StyleBoxFlat
 var style_tab_inactive: StyleBoxFlat
 
-# Dados em cache
+# Dados em cache e paginação
 var all_current_results: Array = []
 var known_stores: Dictionary = {}
+var current_query: String = ""
+var current_dias: String = "168"
+var next_page_to_load: int = 0
+var has_more_pages: bool = false
+var is_loading_more: bool = false
 
 func _ready() -> void:
 	api_client = ApiClientClass.new()
@@ -165,37 +171,75 @@ func _setup_events() -> void:
 	btn_clear_cart.pressed.connect(_on_clear_cart_pressed)
 	btn_copy_whatsapp.pressed.connect(_on_copy_whatsapp_pressed)
 	opt_bairros.item_selected.connect(func(_idx): _filter_and_render_results())
+	btn_load_more.pressed.connect(_on_load_more_pressed)
 
-func _do_search(query: String) -> void:
+func _do_search(query: String, is_load_more_call: bool = false) -> void:
 	if query.strip_edges().is_empty():
 		lbl_status.text = "Digite o nome de um produto."
 		return
 	
-	lbl_status.text = "Buscando preços de '%s' na SEFAZ (Parintins - AM)..." % query.strip_edges()
-	btn_search.disabled = true
+	is_loading_more = is_load_more_call
+	current_query = query.strip_edges()
 	
 	var dias = "168"
 	var selected_id = opt_dias.get_selected_id()
 	if selected_id > 0:
 		dias = str(selected_id)
+	current_dias = dias
 	
-	api_client.search(query, dias, "Parintins")
+	if not is_loading_more:
+		lbl_status.text = "Buscando todos os preços de '%s' na SEFAZ (Parintins - AM)..." % current_query
+		btn_search.disabled = true
+		btn_load_more.visible = false
+		api_client.search(current_query, current_dias, "Parintins", 1)
+	else:
+		lbl_status.text = "Carregando mais preços da SEFAZ (Página %d+)..." % next_page_to_load
+		btn_load_more.disabled = true
+		btn_load_more.text = "Carregando mais preços..."
+		api_client.search(current_query, current_dias, "Parintins", next_page_to_load)
 
-func _on_search_completed(items: Array) -> void:
+func _on_load_more_pressed() -> void:
+	if next_page_to_load > 0 and not current_query.is_empty():
+		_do_search(current_query, true)
+
+func _on_search_completed(items: Array, has_more: bool = false, next_page: int = 0) -> void:
 	btn_search.disabled = false
-	all_current_results = items
+	has_more_pages = has_more
+	next_page_to_load = next_page
 	
-	if items.is_empty():
+	if is_loading_more:
+		var existing_ids: Dictionary = {}
+		for existing in all_current_results:
+			existing_ids[existing.get("id", "")] = true
+		
+		for it in items:
+			if not existing_ids.has(it.get("id", "")):
+				all_current_results.append(it)
+		
+		all_current_results.sort_custom(func(a, b): return float(a.get("preco", 0)) < float(b.get("preco", 0)))
+		is_loading_more = false
+	else:
+		all_current_results = items
+	
+	if all_current_results.is_empty():
 		lbl_status.text = "Nenhum produto encontrado em Parintins para este termo."
 		empty_search_panel.visible = true
+		btn_load_more.visible = false
 		_clear_results_grid()
 		return
 	
-	lbl_status.text = "Encontrados %d preços em Parintins - AM." % items.size()
+	lbl_status.text = "Encontrados %d preços registrados em Parintins - AM." % all_current_results.size()
 	empty_search_panel.visible = false
 	
+	if has_more_pages and next_page_to_load > 0:
+		btn_load_more.visible = true
+		btn_load_more.disabled = false
+		btn_load_more.text = "🔄 Carregar Mais Preços da SEFAZ (Página %d+)" % next_page_to_load
+	else:
+		btn_load_more.visible = false
+	
 	# Registra estabelecimentos descobertos
-	for item in items:
+	for item in all_current_results:
 		var store = item.get("estabelecimento", "")
 		var bairro = item.get("bairro", "")
 		var endereco = item.get("endereco", "")
@@ -207,6 +251,10 @@ func _on_search_completed(items: Array) -> void:
 
 func _on_search_error(msg: String) -> void:
 	btn_search.disabled = false
+	btn_load_more.disabled = false
+	if is_loading_more:
+		btn_load_more.text = "🔄 Tentar Carregar Novamente"
+		is_loading_more = false
 	lbl_status.text = "Aviso: " + msg
 
 func _clear_results_grid() -> void:

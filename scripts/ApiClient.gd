@@ -10,14 +10,14 @@ func _ready() -> void:
 	add_child(http_request)
 	http_request.request_completed.connect(_on_request_completed)
 
-func search(query: String, dias: String = "168", municipio: String = "Parintins") -> void:
+func search(query: String, dias: String = "168", municipio: String = "Parintins", page: int = 1) -> void:
 	if query.strip_edges().is_empty():
 		Global.search_error.emit("Digite o nome de um produto para pesquisar.")
 		return
 	
 	var clean_q = query.strip_edges().uri_encode()
 	var clean_mun = municipio.strip_edges().uri_encode()
-	var url = "%s?q=%s&municipio=%s&dias=%s" % [Global.api_base_url, clean_q, clean_mun, dias]
+	var url = "%s?q=%s&municipio=%s&dias=%s&page=%d" % [Global.api_base_url, clean_q, clean_mun, dias, page]
 	
 	# Cancela requisição anterior se ainda estiver em andamento
 	if http_request.get_http_client_status() != HTTPClient.STATUS_DISCONNECTED:
@@ -52,6 +52,8 @@ func _on_request_completed(result: int, response_code: int, _headers: PackedStri
 	var data = json.data
 	if data is Dictionary and data.has("items"):
 		var items = data["items"]
-		Global.search_completed.emit(items)
+		var has_more = bool(data.get("hasMore", false))
+		var next_page = int(data.get("nextPage", 0))
+		Global.search_completed.emit(items, has_more, next_page)
 	else:
-		Global.search_completed.emit([])
+		Global.search_completed.emit([], false, 0)
