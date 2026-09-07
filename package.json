@@ -1,0 +1,10 @@
+{
+  "name": "busca-preco-parintins",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Buscador e Comparador de Preços de Supermercados em Parintins - AM",
+  "scripts": {
+    "start": "node api/server.js"
+  }
+}

@@ -1,0 +1,8 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Ignore large Windows executable for GitHub (>100MB limit)
+build/windows/*.exe
+build/windows/*.pck
+node_modules/
